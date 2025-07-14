@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="main.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">My<span>Portfolio</span></div>
+    <nav>
+      <a href="#home" class="active">HOME</a>
+      <a href="#experience">EXPERIENCE</a>
+      <a href="#achievements">ACHIEVEMENTS</a>
+      <a href="#about">ABOUT</a>
+      <a href="#contact">CONTACT</a>
+    </nav>
+  </header>
+
+  <!-- Home / Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-left">
+      <h1>Falak Naz</h1>
+      <h2>Frontend Developer</h2>
+      <div class="social-icons">
+        <a href="https://www.linkedin.com/in/falak-naz-26742a336/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/falaknaz433" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fas fa-youtube"></i></a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="circle-border">
+        <img src="fal2.jpg.JPG" alt="Your Photo">
+      </div>
+    </div>
+    <div class="scroll-down" onclick="scrollToSection('contact')">
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section class="section" id="experience">
+    <h2>Experience</h2>
+    <p>I am a Frontend Developer with a diverse skill set that includes experience in photography, backend development, and programming languages such as Java and C++. I have also actively participated in several AI-focused workshops, which have played a key role in expanding my technical knowledge. My journey reflects a consistent passion for learning, creativity, and staying engaged with both design and development aspects of technology.</p>
+  </section>
+
+  <!-- Achievements Section -->
+<section class="section" id="achievements">
+  <h2>Achievements</h2>
+  <ul>
+    <li>Certified in Photography – showcasing creative and technical skills.</li>
+    <li>Awarded Leadership Certificate for demonstrating initiative and team management.</li>
+    <li>Received Teamwork Certificate for effective collaboration and communication.</li>
+    <li>Recipient of multiple academic and coding awards for excellence in design and UI implementation.</li>
+  </ul>
+</section>
+
+  <!-- About Section -->
+  <section class="section" id="about">
+    <h2>About Me</h2>
+    <p>I’m Falak Naz, currently a third-year Computer Science student. I’ve actively participated in various AI workshops and was also a part of JTech. I’m highly passionate about my work and always eager to learn and grow. Throughout my journey, I’ve explored and learned several programming languages, which has helped me strengthen both my technical and problem-solving skills.</p>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section" id="contact">
+    <h2>Contact</h2>
+    <p>Email: mimmoshaikh@gmail.com<br>LinkedIn: linkedin.com/in/falaknaz<br>contact no: 0123456789</p>
+  </section>
+
+ <!-- API Section: Random User -->
+<section class="section" id="random-user">
+  <h2>Explore More (via API)</h2>
+  <div id="api-content">
+    <p>Loading random user data...</p>
+  </div>
+</section>
+
+  <script>
+    function scrollToSection(id) {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  </script>
+<script>
+  async function loadRandomUser() {
+    try {
+      const response = await fetch('https://randomuser.me/api/');
+      const data = await response.json();
+      const user = data.results[0];
+
+      document.getElementById('api-content').innerHTML = `
+        <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px; max-width: 400px;">
+          <img src="${user.picture.large}" alt="Random User" style="border-radius: 50%; width: 100px; height: 100px;">
+          <h3>${user.name.first} ${user.name.last}</h3>
+          <p><strong>Email:</strong> ${user.email}</p>
+          <p><strong>Country:</strong> ${user.location.country}</p>
+        </div>
+      `;
+    } catch (error) {
+      document.getElementById('api-content').innerHTML = '<p>Failed to load data. Please try again later.</p>';
+    }
+  }
+
+  // Call function on page load
+  window.onload = loadRandomUser;
+</script>
+</body>
+</html>
